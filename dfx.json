@@ -1,0 +1,23 @@
+{
+  "canisters": {
+    "forum": {
+      "type": "custom",
+      "main": "src/index.ts",
+      "candid": "src/index.did",
+      "candid_gen": "http",
+      "build": "npx azle forum",
+      "wasm": ".azle/forum/forum.wasm",
+      "gzip": true,
+      "metadata": [
+        {
+            "name": "candid:service",
+            "path": "src/index.did"
+        },
+        {
+            "name": "cdk:name",
+            "content": "azle"
+        }
+    ]
+    }
+  }
+}
