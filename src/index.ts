@@ -544,6 +544,8 @@ function getCategoryOrTopicOrPost(res: any, categoryid: string, topicid?: string
             return Err(undefined);
          } else if (postid === undefined) {
             return Ok(topic);
+         } else if (postid == "posts") {
+            return Ok(topic.posts);
          } else {
             const post = topic.posts[postid];
             if (!post) {
@@ -679,7 +681,7 @@ function removeModerator(address: string, caller: string): Result<string, string
       return Err('You are not authorized to remove a moderator');
    }
 
-   const moderatorEntry = Array.from(moderatorsStorage.entries()).find(([key, value]) => value === address);
+   const moderatorEntry = Array.from(moderatorsStorage.items()).find(([key, value]) => value === address);
    if (!moderatorEntry) {
       return Err('Moderator not found');
    }
@@ -694,7 +696,7 @@ function removeAdmin(address: string, caller: string): Result<string, string> {
       return Err('You are not authorized to remove an admin');
    }
 
-   const adminEntry = Array.from(adminsStorage.entries()).find(([key, value]) => value === address);
+   const adminEntry = Array.from(adminsStorage.items()).find(([key, value]) => value === address);
    if (!adminEntry) {
       return Err('Admin not found');
    }
@@ -727,7 +729,7 @@ function unbanAddress(address: string, caller: string): Result<string, string> {
       return Err('You are not authorized to unban this address');
    }
 
-   const bannedEntry = Array.from(bannedAddressesStorage.entries()).find(([key, value]) => value === address);
+   const bannedEntry = Array.from(bannedAddressesStorage.items()).find(([key, value]) => value === address);
    if (!bannedEntry) {
       return Err('Address is not banned');
    }
